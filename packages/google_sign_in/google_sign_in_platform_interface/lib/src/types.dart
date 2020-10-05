@@ -29,7 +29,8 @@ class GoogleSignInUserData {
     required this.email,
     required this.id,
     this.displayName,
-    this.photoUrl,
+    this.photoUrl, 
+    this.serverAuthCode,
     this.idToken,
   });
 
@@ -65,10 +66,14 @@ class GoogleSignInUserData {
   /// A token that can be sent to your own server to verify the authentication
   /// data.
   String? idToken;
+  
+  /// Authorization code required to make API calls from the server.
+  /// Read more on <https://developers.google.com/identity/sign-in/android/offline-access>
+  String serverAuthCode;
 
   @override
   int get hashCode =>
-      hashObjects(<String?>[displayName, email, id, photoUrl, idToken]);
+      hashObjects(<String?>[displayName, email, id, photoUrl, idToken, serverAuthCode]);
 
   @override
   bool operator ==(dynamic other) {
@@ -79,7 +84,8 @@ class GoogleSignInUserData {
         otherUserData.email == email &&
         otherUserData.id == id &&
         otherUserData.photoUrl == photoUrl &&
-        otherUserData.idToken == idToken;
+        otherUserData.idToken == idToken  &&
+        otherUserData.serverAuthCode == serverAuthCode;
   }
 }
 
