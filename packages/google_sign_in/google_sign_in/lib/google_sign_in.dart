@@ -12,6 +12,7 @@ import 'src/common.dart';
 
 export 'package:google_sign_in_platform_interface/google_sign_in_platform_interface.dart'
     show SignInOption;
+
 export 'src/common.dart';
 export 'widgets.dart';
 
@@ -70,7 +71,7 @@ class GoogleSignInAccount implements GoogleIdentity {
   final String? photoUrl;
 
   final String? _idToken;
-  final String _serverAuthCode;
+  final String? _serverAuthCode;
   final GoogleSignIn _googleSignIn;
 
   /// Retrieve [GoogleSignInAuthentication] for this account.
@@ -99,11 +100,11 @@ class GoogleSignInAccount implements GoogleIdentity {
     if (response.idToken == null) {
       response.idToken = _idToken;
     }
-    
+
     if (response.serverAuthCode == null) {
       response.serverAuthCode = _serverAuthCode;
     }
-    
+
     return GoogleSignInAuthentication._(response);
   }
 
@@ -142,7 +143,8 @@ class GoogleSignInAccount implements GoogleIdentity {
   }
 
   @override
-  int get hashCode => hashValues(displayName, email, id, photoUrl, _idToken, _serverAuthCode);
+  int get hashCode =>
+      hashValues(displayName, email, id, photoUrl, _idToken, _serverAuthCode);
 
   @override
   String toString() {
